@@ -19,17 +19,20 @@ Reuses the exact option strings and PROCESSED_FIELDS from enrichment.py
 redefining them here.
 """
 
-import sys
 from collections import Counter
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent / "instructor" / "reference_pipeline" / "reference_processing" / "03_enrichment"))
-from enrichment import (  # noqa: E402
-    PROCESSED_FIELDS,
-    TECH_DOCUMENTATION_OPTION,
-    AI_CODEGEN_OPTION,
-    STACK_OVERFLOW_OPTION,
-)
+# Constants from enrichment.py - these define the exact option strings
+# and field list that the enrichment step must produce
+TECH_DOCUMENTATION_OPTION = "Technical documentation (is generated for/by the tool or system)"
+AI_CODEGEN_OPTION = "AI CodeGen tools or AI-enabled apps"
+STACK_OVERFLOW_OPTION = "Stack Overflow or Stack Exchange"
+
+PROCESSED_FIELDS = [
+    "responseId", "age", "yearsCode", "devType", "learnCodeChoose",
+    "learningMethods", "learnCodeAI", "aiLearningMethods", "aiUsage",
+    "aiTrust", "aiSentiment", "experienceLevel", "usesDocumentation",
+    "usesAIForLearning", "usesStackOverflow",
+]
 
 EXPECTED_FIELDS = set(PROCESSED_FIELDS)
 

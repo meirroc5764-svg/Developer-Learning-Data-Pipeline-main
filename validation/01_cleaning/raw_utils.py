@@ -33,4 +33,3 @@ def load_raw_by_id(path):
                 field: _normalize(row[field]) for field in PASSTHROUGH_FIELDS
             }
     return raw_by_id
-

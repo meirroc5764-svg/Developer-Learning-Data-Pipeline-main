@@ -19,7 +19,7 @@ from processed_contract import run_processed_contract_checks, check_golden_sampl
 
 THIS_DIR = Path(__file__).resolve().parent
 DAY4_DIR = THIS_DIR.parent.parent.parent
-RAW_FILE = DAY4_DIR / "shared" / "data" / "developer_ai_learning_raw.csv"
+RAW_FILE = DAY4_DIR / "Developer-Learning-Data-Pipeline-main" / "data" / "developer_ai_learning_raw.csv"
 GOLDEN_FILE = DAY4_DIR / "instructor" / "expected" / "golden_sample_processed.json"
 
 # processed field -> raw CSV field, for fields that should pass straight

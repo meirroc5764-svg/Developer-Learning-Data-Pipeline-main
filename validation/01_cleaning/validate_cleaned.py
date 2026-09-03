@@ -20,7 +20,7 @@ from raw_utils import load_raw_ids, load_raw_by_id, PASSTHROUGH_FIELDS
 
 THIS_DIR = Path(__file__).resolve().parent
 DAY4_DIR = THIS_DIR.parent.parent.parent
-RAW_FILE = DAY4_DIR / "shared" / "data" / "developer_ai_learning_raw.csv"
+RAW_FILE = DAY4_DIR / "Developer-Learning-Data-Pipeline-main" / "data" / "developer_ai_learning_raw.csv"
 GOLDEN_FILE = DAY4_DIR / "instructor" / "expected" / "golden_sample_cleaned.json"
 
 EXPECTED_FIELDS = {
@@ -47,11 +47,13 @@ VALID_CATEGORIES = {
 
 def load_jsonl(path):
     records = []
-    with open(path, encoding="utf-8") as f:
-        for line in f:
+    with open(path,"r", encoding="utf-8") as f:
+        data = f.readlines()
+        for line in data:
             line = line.strip()
             if line:
                 records.append(json.loads(line))
+        print(records[0])
     return records
 
 
@@ -83,7 +85,10 @@ def main():
         check="Check whether you accidentally dropped rows (e.g. with dropna()).",
     )
 
-    bad_fields_record = first_bad(records, lambda r: set(r.keys()) == EXPECTED_FIELDS)
+    predicate = lambda r: set(r.keys()) == EXPECTED_FIELDS
+
+
+    bad_fields_record = first_bad(records, predicate)
     cp.check(
         bad_fields_record is None,
         "Every record has exactly the 11 expected fields",
